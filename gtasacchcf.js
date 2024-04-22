@@ -16,7 +16,7 @@ const wordlist = (length, alphabet) => {
   let words = [...alphabet];
   for (let i = 1; i < length; i++)
     words = words
-      .map((word) => alphabet.map((letter) => word + letter))
+      .map((word) => alphabet.map((letter) => [...word, ...letter]))
       .reduce((acc, cur) => [...acc, ...cur]);
   return words;
 };
