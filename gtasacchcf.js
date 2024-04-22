@@ -14,3 +14,11 @@ const nextString = (string, alphabet) => {
   } while (base == alphabet[alphabet.length - 1]);
   return string;
 };
+const wordlist = (length, alphabet) => {
+  let words = [...alphabet.split('')];
+  for (let i = 1; i < length; i++)
+    words = words
+      .map((word) => alphabet.split('').map((letter) => word + letter))
+      .reduce((acc, cur) => [...acc, ...cur]);
+  return words;
+};
