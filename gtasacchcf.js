@@ -20,7 +20,7 @@ const wordlist = (length, alphabet) => {
       .reduce((acc, cur) => [...acc, ...cur]);
   return words;
 };
-const hashes = [
+const cheathashes = [
   'DE4B237D',
   'B22A28D1',
   '5A783FAE',
@@ -108,5 +108,49 @@ const hashes = [
   'E49C3ED4',
   '171BA8CC',
   '86988DAE',
-  '2BDD2FA1'
-]
+  '2BDD2FA1',
+];
+const argv = Bun.argv.slice(2);
+const alphabet = argv.includes('-a')
+  ? argv[argv.indexOf('-a') + 1]
+  : argv.includes('--alphabet')
+  ? argv[argv.indexOf('--alphabet') + 1]
+  : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const start = argv.includes('-s')
+  ? argv[argv.indexOf('-s') + 1]
+  : argv.includes('--start')
+  ? argv[argv.indexOf('--start') + 1]
+  : alphabet[0];
+const end = argv.includes('-e')
+  ? next(argv[argv.indexOf('-e') + 1].split(''), alphabet.split('')).join('')
+  : argv.includes('--end')
+  ? next(argv[argv.indexOf('--end') + 1].split(''), alphabet.split('')).join('')
+  : undefined;
+const hash = argv.includes('-H')
+  ? argv[argv.indexOf('-H') + 1]
+  : argv.includes('--hash')
+  ? argv[argv.indexOf('--hash') + 1]
+  : undefined;
+const cheathash = argv.includes('-c')
+  ? s2h(argv[argv.indexOf('-c') + 1])
+  : argv.includes('--cheat')
+  ? s2h(argv[argv.indexOf('--cheat') + 1])
+  : argv.includes('-C')
+  ? argv[argv.indexOf('-C') + 1].toUpperCase()
+  : argv.includes('--cheat-hash')
+  ? argv[argv.indexOf('--cheat-hash') + 1].toUpperCase()
+  : undefined;
+if (hash) {
+  console.log(s2h(hash));
+  process.exit();
+}
+let hashes;
+cheathash ? (hashes = [cheathash]) : (hashes = [...cheathashes]);
+for (
+  let current = start;
+  current !== end;
+  current = next(current.split(''), alphabet.split('')).join('')
+) {
+  const hash = s2h(current);
+  if (hashes.includes(hash)) console.log(`[${hash}] ${current}`);
+}
