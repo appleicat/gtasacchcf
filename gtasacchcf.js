@@ -1,5 +1,9 @@
 import cheathashes from "./cheathashes.json";
-const s2h=(s)=>(~Bun.hash.crc32(s.toUpperCase().split('').reverse().join(''))>>>0).toString(16).padStart(8,'0').toUpperCase();
+const s2h = (s) =>
+  (~Bun.hash.crc32(s.toUpperCase().split("").reverse().join("")) >>> 0)
+    .toString(16)
+    .padStart(8, "0")
+    .toUpperCase();
 const next = (array, alphabet) => {
   let index = array.length - 1;
   let base;
@@ -22,34 +26,34 @@ const wordlist = (length, alphabet) => {
   return words;
 };
 const argv = Bun.argv.slice(2);
-const alphabet = argv.includes('-a')
-  ? argv[argv.indexOf('-a') + 1]
-  : argv.includes('--alphabet')
-  ? argv[argv.indexOf('--alphabet') + 1]
-  : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const start = argv.includes('-s')
-  ? argv[argv.indexOf('-s') + 1]
-  : argv.includes('--start')
-  ? argv[argv.indexOf('--start') + 1]
+const alphabet = argv.includes("-a")
+  ? argv[argv.indexOf("-a") + 1]
+  : argv.includes("--alphabet")
+  ? argv[argv.indexOf("--alphabet") + 1]
+  : "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const start = argv.includes("-s")
+  ? argv[argv.indexOf("-s") + 1]
+  : argv.includes("--start")
+  ? argv[argv.indexOf("--start") + 1]
   : alphabet[0];
-const end = argv.includes('-e')
-  ? next(argv[argv.indexOf('-e') + 1].split(''), alphabet.split('')).join('')
-  : argv.includes('--end')
-  ? next(argv[argv.indexOf('--end') + 1].split(''), alphabet.split('')).join('')
+const end = argv.includes("-e")
+  ? next(argv[argv.indexOf("-e") + 1].split(""), alphabet.split("")).join("")
+  : argv.includes("--end")
+  ? next(argv[argv.indexOf("--end") + 1].split(""), alphabet.split("")).join("")
   : undefined;
-const hash = argv.includes('-H')
-  ? argv[argv.indexOf('-H') + 1]
-  : argv.includes('--hash')
-  ? argv[argv.indexOf('--hash') + 1]
+const hash = argv.includes("-H")
+  ? argv[argv.indexOf("-H") + 1]
+  : argv.includes("--hash")
+  ? argv[argv.indexOf("--hash") + 1]
   : undefined;
-const cheathash = argv.includes('-c')
-  ? s2h(argv[argv.indexOf('-c') + 1])
-  : argv.includes('--cheat')
-  ? s2h(argv[argv.indexOf('--cheat') + 1])
-  : argv.includes('-C')
-  ? argv[argv.indexOf('-C') + 1].toUpperCase()
-  : argv.includes('--cheat-hash')
-  ? argv[argv.indexOf('--cheat-hash') + 1].toUpperCase()
+const cheathash = argv.includes("-c")
+  ? s2h(argv[argv.indexOf("-c") + 1])
+  : argv.includes("--cheat")
+  ? s2h(argv[argv.indexOf("--cheat") + 1])
+  : argv.includes("-C")
+  ? argv[argv.indexOf("-C") + 1].toUpperCase()
+  : argv.includes("--cheat-hash")
+  ? argv[argv.indexOf("--cheat-hash") + 1].toUpperCase()
   : undefined;
 if (hash) {
   console.log(s2h(hash));
@@ -59,7 +63,7 @@ const hashes = cheathash ? [cheathash] : [...cheathashes];
 for (
   let current = start;
   current !== end;
-  current = next(current.split(''), alphabet.split('')).join('')
+  current = next(current.split(""), alphabet.split("")).join("")
 ) {
   const hash = s2h(current);
   if (hashes.includes(hash)) console.log(`[${hash}] ${current}`);
