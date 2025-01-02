@@ -13,6 +13,9 @@ on:
         type: string
         default: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+permissions:
+  pull-requests: write
+
 jobs:
   main:
     runs-on: ubuntu-latest
