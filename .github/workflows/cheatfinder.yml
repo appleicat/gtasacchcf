@@ -31,6 +31,7 @@ jobs:
         git checkout newdata
         git add data
         git commit --message="[action] new data"
-        gh pr create --title="[action] new data" --body="prepared new data" --base="main" --head="${{ github.ref }}"
+        git push
+        gh pr create --title="[action] new data" --body="prepared new data" --base="main" --head="newdata"
       env:
         GH_TOKEN: ${{ github.token }}
