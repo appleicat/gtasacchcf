@@ -25,7 +25,5 @@ jobs:
         bun tsv.js
     - name: Git changes
       run: |
-        # git config user.name "github-actions[bot]"
-        # git config user.email "github-actions[bot]@users.noreply.github.com"
-        git commit --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -a -m "[action] Cheat finder"
+        git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" commit -a -m "[action] New data"
         gh pr create --head --fill
