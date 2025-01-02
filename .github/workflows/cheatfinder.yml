@@ -23,9 +23,14 @@ jobs:
       run: |
         bun gtasacchcf.js -s ${{ inputs.start }} -e ${{ inputs.end }} -a ${{ inputs.alphabet }}
         bun tsv.js
-    - name: Git changes
+    - name: Git actions
       run: |
-        git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" commit -a -m "[action] New data"
-        gh pr create --title="New data" --body="Prepared new data" --head="HEAD"
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git branch newdata
+        git checkout newdata
+        git add data
+        git commit --message="[action] new data"
+        gh pr create --title="[action] new data" --body="prepared new data" --base="main" --head="newdata"
       env:
         GH_TOKEN: ${{ github.token }}
