@@ -19,12 +19,13 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - uses: oven-sh/setup-bun@main
-    - run: |
+    - name: Prepare data
+      run: |
         bun gtasacchcf.js -s ${{ inputs.start }} -e ${{ inputs.end }} -a ${{ inputs.alphabet }}
         bun tsv.js
-    - run: |
+    - name: Git changes
+      run: |
         # git config user.name "github-actions[bot]"
         # git config user.email "github-actions[bot]@users.noreply.github.com"
-        # git add data/
         git commit --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -a -m "[action] Cheat finder"
         gh pr create --head --fill
