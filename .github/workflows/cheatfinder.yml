@@ -27,3 +27,5 @@ jobs:
       run: |
         git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" commit -a -m "[action] New data"
         gh pr create --head --fill
+      env:
+        GH_TOKEN: ${{ github.token }}
