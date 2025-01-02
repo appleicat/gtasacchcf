@@ -32,6 +32,6 @@ jobs:
         git add data
         git commit --message="[action] new data"
         git push --set-upstream origin newdata
-        gh pr create --title="[action] new data" --body="start: ${{ inputs.start }}\nend: ${{ inputs.end }}\nalphabet: ${{ inputs.alphabet }}" --base="main" --head="newdata"
+        gh pr create --title="[action] new data" --body="start: ${{ inputs.start }}   end: ${{ inputs.end }}   alphabet: ${{ inputs.alphabet }}" --base="main" --head="newdata"
       env:
         GH_TOKEN: ${{ github.token }}
