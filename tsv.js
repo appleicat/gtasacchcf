@@ -3,7 +3,7 @@ const json = (await data.exists())
   ? JSON.parse(await data.text())
   : process.exit();
 const file = Bun.file("./data/data.tsv");
-const write = [`HASH\tCHEATS`];
+const write = [[`HASH`, `CHEATCODE`].join(`\t`)];
 for (const [hash, cheats] of Object.entries(json))
-  write.push(`${hash}\t${cheats.join(` `)}`);
+  for (const cheat of cheats) write.push([hash, cheat].join(`\t`));
 Bun.write(file, write.join(`\n`));
