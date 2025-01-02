@@ -13,9 +13,6 @@ on:
         type: string
         default: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-permissions:
-  contents: write
-
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -26,5 +23,6 @@ jobs:
     - run: bun tsv.js
     - run: git config user.name "github-actions[bot]"
     - run: git config user.email "github-actions[bot]@users.noreply.github.com"
-    - run: git commit -a -m "[action] Cheat finder" --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+    - run: git add data/
+    - run: git commit -m "[action] Cheat finder" --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
     - run: gh pr create --head --fill
