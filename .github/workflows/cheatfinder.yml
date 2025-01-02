@@ -26,5 +26,5 @@ jobs:
         # git config user.name "github-actions[bot]"
         # git config user.email "github-actions[bot]@users.noreply.github.com"
         # git add data/
-        git commit -a -m "[action] Cheat finder" --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+        git commit --author="github-actions[bot] <github-actions[bot]@users.noreply.github.com>" -a -m "[action] Cheat finder"
         gh pr create --head --fill
