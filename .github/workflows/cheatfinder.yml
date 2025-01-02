@@ -1,0 +1,25 @@
+name: Cheat finder
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        type: string
+        required: true
+      end:
+        type: string
+        required: true
+      alphabet: 
+        type: string
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: oven-sh/setup-bun@main
+    - run: bun gtasacchcf.js -s ${{ inputs.start }} -e ${{ inputs.end }} -a ${{ inputs.alphabet }}
+    - run: bun tsv.js
+    - run: git add data/
+    - run: git commit -m "[action] Cheat finder" --author "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+    - run: gh pr create --head --fill
