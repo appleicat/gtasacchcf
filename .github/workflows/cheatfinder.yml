@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - uses: oven-sh/setup-bun@main
-    - run: bun gtasacchcf.js -s ${{ inputs.start }} -e ${{ inputs.end }} -a ${{ inputs.alphabet }}
+    - run: bun gtasacchcf.js -s ${{ inputs.start }} -e ${{ inputs.end }} -a ${{ inputs.alphabet || "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }}
     - run: bun tsv.js
     - run: git add data/
     - run: git commit -m "[action] Cheat finder" --author "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
