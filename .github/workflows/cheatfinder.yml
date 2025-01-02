@@ -31,7 +31,7 @@ jobs:
         git checkout newdata
         git add data
         git commit --message="[action] new data"
-        git push
+        git push --set-upstream origin newdata
         gh pr create --title="[action] new data" --body="prepared new data" --base="main" --head="newdata"
       env:
         GH_TOKEN: ${{ github.token }}
