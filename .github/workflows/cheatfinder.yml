@@ -26,6 +26,6 @@ jobs:
     - name: Git changes
       run: |
         git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" commit -a -m "[action] New data"
-        gh pr create --fill-first
+        gh pr create --head --fill-first
       env:
         GH_TOKEN: ${{ github.token }}
