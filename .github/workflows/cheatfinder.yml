@@ -27,11 +27,11 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git branch newdata
-        git checkout newdata
+        git branch ${{ inputs.start }}:${{ inputs.end }}:${{ inputs.alphabet }}
+        git checkout ${{ inputs.start }}:${{ inputs.end }}:${{ inputs.alphabet }}
         git add data
-        git commit --message="[action] new data"
-        git push --set-upstream origin newdata
-        gh pr create --title="[action] new data" --body="start:${{ inputs.start }} end:${{ inputs.end }} alphabet:${{ inputs.alphabet }}" --base="main" --head="newdata"
+        git commit --message="[action] ${{ inputs.start }}:${{ inputs.end }}:${{ inputs.alphabet }}"
+        git push --set-upstream origin ${{ inputs.start }}:${{ inputs.end }}:${{ inputs.alphabet }}
+        gh pr create --title="[action] ${{ inputs.start }}:${{ inputs.end }}:${{ inputs.alphabet }}" --body="start:${{ inputs.start }} end:${{ inputs.end }} alphabet:${{ inputs.alphabet }}" --base="main" --head="${{ inputs.start }}:${{ inputs.end }}:${{ inputs.alphabet }}"
       env:
         GH_TOKEN: ${{ github.token }}
